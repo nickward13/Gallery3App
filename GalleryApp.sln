@@ -16,6 +16,7 @@ Global
 		GalleryApp\GalleryApp\GalleryApp.projitems*{246b8b63-c6b5-4b09-b0dd-f5c6adb57c03}*SharedItemsImports = 4
 		GalleryApp\GalleryApp\GalleryApp.projitems*{7c3b7dc7-faa8-4248-929a-e07828d32da5}*SharedItemsImports = 13
 		GalleryApp\GalleryApp\GalleryApp.projitems*{a04c1cae-a681-431a-9932-5992cd45792b}*SharedItemsImports = 4
+		GalleryApp\GalleryApp\GalleryApp.projitems*{c796c852-cbc1-4803-81ad-422f9939dd46}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU

@@ -9,6 +9,8 @@ namespace GalleryApp
 {
 	public partial class MainPage : ContentPage
 	{
+        ViewModels.GalleryViewModel gallery = new ViewModels.GalleryViewModel();
+
 		public MainPage()
 		{
 			InitializeComponent();
