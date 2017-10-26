@@ -9,6 +9,14 @@ namespace GalleryApp.Models
         public string MimeType { get; set; }
         public string FileUrl { get; set; }
 
+        public Photo()
+        {
+            Id = 0;
+            Name = "Blank";
+            Title = "Getting there...";
+            Type = "photo";
+        }
+
         public Photo(int id, string name, string title, string thumbUrlPublic, string webUrl, string mimeType, string fileUrl)
         {
             Id = id;

@@ -11,11 +11,21 @@ namespace GalleryApp
     {
         ViewModels.AlbumViewModel albumViewModel;
 
+        public AlbumPage()
+        {
+            InitializeComponent();
+        }
+
         public AlbumPage(int GalleryItemId)
         {
             InitializeComponent();
             albumViewModel = new ViewModels.AlbumViewModel(GalleryItemId);
-            AlbumStackLayout.BindingContext = albumViewModel;
+            BindingContext = albumViewModel;
+        }
+
+        void Handle_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
+        {
+            ((ListView)sender).SelectedItem = null;
         }
 
         void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
@@ -26,7 +36,7 @@ namespace GalleryApp
                 OpenNewAlbumPage(tappedEntity.Id);
             } else if (tappedEntity.Type == "photo")
             {
-                DisplayAlert("You've tapped a photo", "carry on", "Ok");
+                OpenNewPhotoPage(tappedEntity.Id);
             } else
             {
                 DisplayAlert("You've tapped nothing", "carry on", "Ok");
@@ -37,6 +47,12 @@ namespace GalleryApp
         {
             var newAlbumPage = new AlbumPage(AlbumId);
             await Navigation.PushAsync(newAlbumPage);
+        }
+
+        async void OpenNewPhotoPage(int PhotoId)
+        {
+            var newPhotoPage = new PhotoPage(PhotoId);
+            await Navigation.PushAsync(newPhotoPage);
         }
 
     }

@@ -13,7 +13,8 @@ namespace GalleryApp.ViewModels
 {
     public class AlbumViewModel : INotifyPropertyChanged
     {
-        private static string galleryUrl = "http://hectagongallerydocker.azurewebsites.net/rest";
+        private Gallery3 gallery3Source = new Gallery3();
+
         private Album album = new Album();
         public Album Album {
             get {
@@ -39,29 +40,9 @@ namespace GalleryApp.ViewModels
 
         private async void GetAlbumFromGallery3Async(int AlbumId)
         {
-            var galleryJson = await GetJsonFromGallery3Async(String.Concat(galleryUrl, 
-                                                                           String.Concat("/item/",AlbumId)
-                                                                          )
-                                                            );
-            this.album = (Album) await ConvertJsonToAlbumAsync(galleryJson);
+            var albumJson = await gallery3Source.GetJsonFromGallery3Async(AlbumId);
+            this.album = (Album) await ConvertJsonToAlbumAsync(albumJson);
             NotifyPropertyChanged();
-        }
-
-        private async Task<JsonValue> GetJsonFromGallery3Async(string url)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(new Uri(url));
-            request.ContentType = "application/json";
-            request.Method = "GET";
-
-            using (var response = await request.GetResponseAsync())
-            {
-                using (var stream = response.GetResponseStream())
-                {
-                    var jsonDoc = JsonValue.Load(stream);
-                    Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
-                    return jsonDoc;
-                }
-            }
         }
 
         private Entity ConvertJsonToEntity(JsonValue jsonDoc)
@@ -98,9 +79,9 @@ namespace GalleryApp.ViewModels
             return newEntity;
         }
 
-        private async Task<Entity> GetEntityFromGallery3Async(string url)
+        private async Task<Entity> GetEntityFromGallery3Async(string EntityUrl)
         {
-            var galleryJson = await GetJsonFromGallery3Async(url);
+            var galleryJson = await gallery3Source.GetJsonFromGallery3Async(EntityUrl);
             return ConvertJsonToEntity(galleryJson);
         }
 

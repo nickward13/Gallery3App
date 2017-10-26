@@ -3,27 +3,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:local="clr-namespace:GalleryApp;assembly=GalleryApp"
     x:Class="GalleryApp.AlbumPage"
-    Title="Album Page">
+    Title="{Binding Path=Album.Title}">
 	<ContentPage.Content>
-        <StackLayout x:Name="AlbumStackLayout" Orientation="Vertical" >
-            <Label x:Name="TitleLabel" 
-                Text="{Binding Path=Album.Title}"
-                HorizontalOptions="Center"
-                FontSize="Large">
-            </Label>
-            <ListView x:Name="AlbumEntitiesListView"
-                ItemsSource="{Binding Path=Album.Entities}"
-                ItemTapped="Handle_ItemTapped">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ImageCell
-                            Text="{Binding Path=Title}"
-                            ImageSource="{Binding ThumbUrlPublic}"
-                            >
-                        </ImageCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+        <ListView x:Name="AlbumEntitiesListView"
+            ItemsSource="{Binding Path=Album.Entities}"
+            ItemTapped="Handle_ItemTapped"
+            ItemSelected="Handle_ItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ImageCell
+                        Text="{Binding Path=Title}"
+                        ImageSource="{Binding ThumbUrlPublic}"
+                        >
+                    </ImageCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 	</ContentPage.Content>
 </ContentPage>
