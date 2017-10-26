@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:GalleryApp;assembly=GalleryApp"
+    x:Class="GalleryApp.AlbumPage"
+    Title="Album Page">
+	<ContentPage.Content>
+        <StackLayout x:Name="AlbumStackLayout" Orientation="Vertical" >
+            <Label x:Name="TitleLabel" 
+                Text="{Binding Path=Album.Title}"
+                HorizontalOptions="Center"
+                FontSize="Large">
+            </Label>
+            <ListView x:Name="AlbumEntitiesListView"
+                ItemsSource="{Binding Path=Album.Entities}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell
+                            Text="{Binding Path=Title}"
+                            ImageSource="{Binding ThumbUrlPublic}"
+                            >
+                        </ImageCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+	</ContentPage.Content>
+</ContentPage>

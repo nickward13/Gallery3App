@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Json;
 using System.Net;
@@ -10,20 +11,37 @@ using GalleryApp.Models;
 
 namespace GalleryApp.ViewModels
 {
-    public class GalleryViewModel
+    public class AlbumViewModel : INotifyPropertyChanged
     {
         private static string galleryUrl = "http://hectagongallerydocker.azurewebsites.net/rest";
-        public Album Album;
+        private Album album = new Album();
+        public Album Album {
+            get {
+                return album;
+            }
+        }
 
-        public GalleryViewModel()
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public AlbumViewModel()
         {
             GetAlbumFromGallery3Async();
+        }
+
+        private void NotifyPropertyChanged()
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this,
+                    new PropertyChangedEventArgs("Album"));
+            }
         }
 
         private async void GetAlbumFromGallery3Async()
         {
             var galleryJson = await GetJsonFromGallery3Async(String.Concat(galleryUrl, "/item/1"));
-            this.Album = (Album) await ConvertJsonToAlbumAsync(galleryJson);
+            this.album = (Album) await ConvertJsonToAlbumAsync(galleryJson);
+            NotifyPropertyChanged();
         }
 
         private async Task<JsonValue> GetJsonFromGallery3Async(string url)

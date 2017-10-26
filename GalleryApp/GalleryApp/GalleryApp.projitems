@@ -18,7 +18,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Album.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Entity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Photo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\GalleryViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AlbumPage.xaml.cs">
+      <DependentUpon>AlbumPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml">
@@ -27,6 +30,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)AlbumPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

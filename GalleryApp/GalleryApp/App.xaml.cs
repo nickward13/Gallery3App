@@ -13,7 +13,7 @@ namespace GalleryApp
 		{
 			InitializeComponent();
 
-			MainPage = new GalleryApp.MainPage();
+			MainPage = new GalleryApp.AlbumPage();
 		}
 
 		protected override void OnStart ()
