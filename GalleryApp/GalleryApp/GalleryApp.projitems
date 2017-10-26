@@ -18,6 +18,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Album.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Entity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Photo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AlbumPage.xaml.cs">
       <DependentUpon>AlbumPage.xaml</DependentUpon>
@@ -41,6 +46,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)PhotoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)SettingsPage.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

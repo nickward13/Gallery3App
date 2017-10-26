@@ -7,8 +7,6 @@ namespace GalleryApp.Models
 {
     public class Gallery3
     {
-        private string gallery3Url = "http://hectagongallerydocker.azurewebsites.net";
-
         public Gallery3()
         {
         }
@@ -17,13 +15,14 @@ namespace GalleryApp.Models
         {
             var request = NewGallery3WebRequest(EntityUrl);
 
-            using (var response = await request.GetResponseAsync())
+            try
             {
-                using (var stream = response.GetResponseStream())
-                {
-                    var jsonDoc = JsonValue.Load(stream);
-                    return jsonDoc;
-                }
+                var response = await request.GetResponseAsync();
+                var stream = response.GetResponseStream();
+                return JsonValue.Load(stream);
+            } catch (WebException)
+            {
+                return null;
             }
         }
 
@@ -42,7 +41,7 @@ namespace GalleryApp.Models
 
         private string ConvertEntityIdToRequestURL(int EntityId)
         {
-            return String.Concat(gallery3Url, String.Concat("/rest/item/", EntityId));
+            return String.Concat(Settings.Gallery3Url, String.Concat("/rest/item/", EntityId));
         }
     }
 }

@@ -10,6 +10,7 @@ namespace GalleryApp
     public partial class AlbumPage : ContentPage
     {
         ViewModels.AlbumViewModel albumViewModel;
+        private int galleryItemId;
 
         public AlbumPage()
         {
@@ -19,6 +20,7 @@ namespace GalleryApp
         public AlbumPage(int GalleryItemId)
         {
             InitializeComponent();
+            galleryItemId = GalleryItemId;
             albumViewModel = new ViewModels.AlbumViewModel(GalleryItemId);
             BindingContext = albumViewModel;
         }
@@ -55,5 +57,21 @@ namespace GalleryApp
             await Navigation.PushAsync(newPhotoPage);
         }
 
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            OpenSettingsPage();
+        }
+
+        async void OpenSettingsPage()
+        {
+            var settingsPage = new SettingsPage();
+            await Navigation.PushAsync(settingsPage);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            albumViewModel.GetAlbumFromGallery3Async(galleryItemId);
+        }
     }
 }

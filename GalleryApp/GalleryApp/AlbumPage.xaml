@@ -5,19 +5,22 @@
     x:Class="GalleryApp.AlbumPage"
     Title="{Binding Path=Album.Title}">
 	<ContentPage.Content>
-        <ListView x:Name="AlbumEntitiesListView"
-            ItemsSource="{Binding Path=Album.Entities}"
-            ItemTapped="Handle_ItemTapped"
-            ItemSelected="Handle_ItemSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ImageCell
-                        Text="{Binding Path=Title}"
-                        ImageSource="{Binding ThumbUrlPublic}"
-                        >
-                    </ImageCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-	</ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="AlbumEntitiesListView"
+                ItemsSource="{Binding Path=Album.Entities}"
+                ItemTapped="Handle_ItemTapped"
+                ItemSelected="Handle_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell
+                            Text="{Binding Path=Title}"
+                            ImageSource="{Binding ThumbUrlPublic}"
+                            >
+                        </ImageCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="{Binding Path=Gallery3Url}" FontSize="Micro" Clicked="Button_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

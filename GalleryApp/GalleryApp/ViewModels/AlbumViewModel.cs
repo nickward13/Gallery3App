@@ -22,6 +22,14 @@ namespace GalleryApp.ViewModels
             }
         }
 
+        public string Gallery3Url
+        {
+            get
+            {
+                return Settings.GetGallery3UrlFromProperties();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public AlbumViewModel(int AlbumId)
@@ -35,13 +43,28 @@ namespace GalleryApp.ViewModels
             {
                 PropertyChanged(this,
                     new PropertyChangedEventArgs("Album"));
+                PropertyChanged(this, new PropertyChangedEventArgs("Gallery3Url"));
             }
         }
 
-        private async void GetAlbumFromGallery3Async(int AlbumId)
+        public async void GetAlbumFromGallery3Async(int AlbumId)
         {
+            ResetAlbum();
             var albumJson = await gallery3Source.GetJsonFromGallery3Async(AlbumId);
-            this.album = (Album) await ConvertJsonToAlbumAsync(albumJson);
+            if (albumJson != null)
+            {
+                this.album = (Album)await ConvertJsonToAlbumAsync(albumJson);
+            }
+            else
+            {
+                this.album = ProblemAlbum();
+            }
+            NotifyPropertyChanged();
+        }
+
+        private void ResetAlbum()
+        {
+            album = new Album();
             NotifyPropertyChanged();
         }
 
@@ -61,10 +84,19 @@ namespace GalleryApp.ViewModels
             };
             foreach (JsonValue galleryMember in jsonDoc["members"])
             {
-                newAlbum.Entities.Add(await GetEntityFromGallery3Async(galleryMember));
+                await AddEntitiesToAlbum(newAlbum, galleryMember);
             }
 
             return newAlbum;
+        }
+
+        private async Task AddEntitiesToAlbum(Album newAlbum, JsonValue galleryMember)
+        {
+            var newEntity = await GetEntityFromGallery3Async(galleryMember);
+            if(newEntity != null)
+            {
+                newAlbum.Entities.Add(newEntity);
+            }            
         }
 
         private static Entity InitializeEntity(JsonValue entityJsonDoc)
@@ -82,7 +114,13 @@ namespace GalleryApp.ViewModels
         private async Task<Entity> GetEntityFromGallery3Async(string EntityUrl)
         {
             var galleryJson = await gallery3Source.GetJsonFromGallery3Async(EntityUrl);
-            return ConvertJsonToEntity(galleryJson);
+            if (galleryJson != null)
+            {
+                return ConvertJsonToEntity(galleryJson);
+            } else
+            {
+                return ProblemEntity();
+            }
         }
 
         private Photo ConvertJsonToPhoto(JsonValue photoJsonDoc)
@@ -90,6 +128,29 @@ namespace GalleryApp.ViewModels
             var p = new Photo(photoJsonDoc["id"], photoJsonDoc["name"], photoJsonDoc["title"], photoJsonDoc["thumb_url_public"],
                 photoJsonDoc["web_url"], photoJsonDoc["mime_type"], photoJsonDoc["file_url_public"]);
             return p;
+        }
+
+        private Entity ProblemEntity()
+        {
+            return new Entity()
+            {
+                Id = 0,
+                Name = "Problem",
+                Title = "Problem accessing Gallery3...",
+                Type = "album"
+            };
+        }
+        
+        private Album ProblemAlbum()
+        {
+            return new Album()
+            {
+                Id = 0,
+                Name = "Problem",
+                Title = "Problem accessing Gallery3...",
+                Type = "album",
+                Entities = new ObservableCollection<Entity>()
+            };
         }
     }
 }
