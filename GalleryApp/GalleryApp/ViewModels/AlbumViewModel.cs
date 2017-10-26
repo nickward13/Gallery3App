@@ -23,9 +23,9 @@ namespace GalleryApp.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public AlbumViewModel()
+        public AlbumViewModel(int AlbumId)
         {
-            GetAlbumFromGallery3Async();
+            GetAlbumFromGallery3Async(AlbumId);
         }
 
         private void NotifyPropertyChanged()
@@ -37,9 +37,12 @@ namespace GalleryApp.ViewModels
             }
         }
 
-        private async void GetAlbumFromGallery3Async()
+        private async void GetAlbumFromGallery3Async(int AlbumId)
         {
-            var galleryJson = await GetJsonFromGallery3Async(String.Concat(galleryUrl, "/item/1"));
+            var galleryJson = await GetJsonFromGallery3Async(String.Concat(galleryUrl, 
+                                                                           String.Concat("/item/",AlbumId)
+                                                                          )
+                                                            );
             this.album = (Album) await ConvertJsonToAlbumAsync(galleryJson);
             NotifyPropertyChanged();
         }

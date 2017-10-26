@@ -14,7 +14,7 @@ namespace GalleryApp.Models
         {
             Id = 0;
             Name = "Blank";
-            Title = "Blank";
+            Title = "Getting there...";
             Type = "album";
             ThumbUrlPublic = "http://";
             WebUrl = "http://";
