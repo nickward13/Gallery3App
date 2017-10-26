@@ -12,7 +12,7 @@ namespace GalleryApp.ViewModels
 {
     public class GalleryViewModel
     {
-        private static string galleryUrl = "http://riogallerydocker.azurewebsites.net/rest";
+        private static string galleryUrl = "http://hectagongallerydocker.azurewebsites.net/rest";
         public Album Album;
 
         public GalleryViewModel()
@@ -36,7 +36,7 @@ namespace GalleryApp.ViewModels
             {
                 using (var stream = response.GetResponseStream())
                 {
-                    var jsonDoc = JsonObject.Load(stream);
+                    var jsonDoc = JsonValue.Load(stream);
                     Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
                     return jsonDoc;
                 }
