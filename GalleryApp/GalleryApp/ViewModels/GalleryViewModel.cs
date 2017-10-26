@@ -20,7 +20,7 @@ namespace GalleryApp.ViewModels
             GetAlbumFromGallery3Async();
         }
 
-        private async Task GetAlbumFromGallery3Async()
+        private async void GetAlbumFromGallery3Async()
         {
             var galleryJson = await GetJsonFromGallery3Async(String.Concat(galleryUrl, "/item/1"));
             this.Album = (Album) await ConvertJsonToAlbumAsync(galleryJson);
