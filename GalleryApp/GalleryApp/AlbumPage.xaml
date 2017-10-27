@@ -21,6 +21,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             <Button Text="{Binding Path=Gallery3Url}" FontSize="Micro" Clicked="Button_Clicked"/>
+            <Button x:Name="AboutButton" Text="About" FontSize="Micro" Clicked="AboutButton_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

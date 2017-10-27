@@ -73,5 +73,16 @@ namespace GalleryApp
             base.OnAppearing();
             albumViewModel.GetAlbumFromGallery3Async(galleryItemId);
         }
+
+        private void AboutButton_Clicked(object sender, EventArgs e)
+        {
+            OpenAboutPage();
+        }
+
+        async private void OpenAboutPage()
+        {
+            var aboutPage = new AboutPage();
+            await Navigation.PushModalAsync(aboutPage);
+        }
     }
 }
