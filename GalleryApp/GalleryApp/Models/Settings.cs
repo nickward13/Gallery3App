@@ -39,7 +39,7 @@ namespace GalleryApp.Models
 
         private static string SaveDefaultGallery3UrlToProperties()
         {
-            string defaultGallery3Url = "http://hectagongallerydocker.azurewebsites.net";
+            string defaultGallery3Url = "http://gallery3hectgallerydocker.azurewebsites.net";
             SetGallery3UrlProperty(defaultGallery3Url);
             return defaultGallery3Url;
         }
