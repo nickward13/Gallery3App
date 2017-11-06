@@ -68,9 +68,8 @@ namespace GalleryApp
             await Navigation.PushAsync(settingsPage);
         }
 
-        protected override void OnAppearing()
+        private void RefreshButton_Clicked(object sender, EventArgs e)
         {
-            base.OnAppearing();
             albumViewModel.GetAlbumFromGallery3Async(galleryItemId);
         }
 
@@ -82,7 +81,7 @@ namespace GalleryApp
         async private void OpenAboutPage()
         {
             var aboutPage = new AboutPage();
-            await Navigation.PushModalAsync(aboutPage);
+            await Navigation.PushAsync(aboutPage);
         }
     }
 }
