@@ -50,5 +50,14 @@
 	<string>LaunchScreen.storyboard</string>
 	<key>CFBundleName</key>
 	<string>Gallery3</string>
+	<key>CFBundleURLTypes</key>
+  <array>
+      <dict>
+          <key>CFBundleURLSchemes</key>
+          <array>
+              <string>mobilecenter-9ee90fd3-6d44-4db1-be00-98614aa7051f</string>
+          </array>
+      </dict>
+  </array>
 </dict>
 </plist>

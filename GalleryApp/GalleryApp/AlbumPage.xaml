@@ -8,8 +8,7 @@
         <StackLayout>
             <ListView x:Name="AlbumEntitiesListView"
                 ItemsSource="{Binding Path=Album.Entities}"
-                ItemTapped="Handle_ItemTapped"
-                ItemSelected="Handle_ItemSelected">
+                ItemTapped="HandleItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell

@@ -24,9 +24,9 @@ namespace GalleryApp
             MainPage = new NavigationPage(new AlbumPage(1));
 		}
 
-		protected override void OnStart ()
+		protected override async void OnStart ()
 		{
-			// Handle when your app starts
+            await Analytics.SetEnabledAsync(true);
 		}
 
 		protected override void OnSleep ()

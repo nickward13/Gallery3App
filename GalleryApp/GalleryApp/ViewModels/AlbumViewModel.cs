@@ -7,6 +7,7 @@ using System.Json;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+
 using GalleryApp.Models;
 
 namespace GalleryApp.ViewModels
@@ -34,7 +35,8 @@ namespace GalleryApp.ViewModels
 
         public AlbumViewModel(int AlbumId)
         {
-            GetAlbumFromGallery3Async(AlbumId);
+            GetAlbumFromGallery3Async(AlbumId)
+                .ConfigureAwait(false);
         }
 
         private void NotifyPropertyChanged()
@@ -47,7 +49,7 @@ namespace GalleryApp.ViewModels
             }
         }
 
-        public async void GetAlbumFromGallery3Async(int AlbumId)
+        public async Task GetAlbumFromGallery3Async(int AlbumId)
         {
             ResetAlbum();
             var albumJson = await gallery3Source.GetJsonFromGallery3Async(AlbumId);

@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
 using GalleryApp.Models;
+using GalleryApp.ViewModels;
+
+using Microsoft.Azure.Mobile.Analytics;
 
 namespace GalleryApp
 {
     public partial class AlbumPage : ContentPage
     {
-        ViewModels.AlbumViewModel albumViewModel;
+        AlbumViewModel albumViewModel;
+
         private int galleryItemId;
 
         public AlbumPage()
@@ -21,18 +26,14 @@ namespace GalleryApp
         {
             InitializeComponent();
             galleryItemId = GalleryItemId;
-            albumViewModel = new ViewModels.AlbumViewModel(GalleryItemId);
+            albumViewModel = new AlbumViewModel(GalleryItemId);
             BindingContext = albumViewModel;
         }
 
-        void Handle_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
+        void HandleItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
-            ((ListView)sender).SelectedItem = null;
-        }
+            var tappedEntity = e.Item as Entity;
 
-        void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
-        {
-            Entity tappedEntity = (Entity)e.Item;
             if(tappedEntity.Type == "album")
             {
                 OpenNewAlbumPage(tappedEntity.Id);
@@ -43,6 +44,11 @@ namespace GalleryApp
             {
                 DisplayAlert("You've tapped nothing", "carry on", "Ok");
             }
+
+            Analytics.TrackEvent("Album item tapped", new Dictionary<string, string> {
+                { "Name", tappedEntity.Name },
+                { "Title", tappedEntity.Title },
+            });
         }
 
         async void OpenNewAlbumPage(int AlbumId)
@@ -59,10 +65,14 @@ namespace GalleryApp
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            OpenSettingsPage();
+            OpenSettingsPage().ConfigureAwait(false);
+
+            Analytics.TrackEvent("AlbumPage - Button_Clicked", null);
         }
 
-        async void OpenSettingsPage()
+        // make sure you use tasks, 
+        // leaving as void can cause untracked memory leaks and exceptions
+        async Task OpenSettingsPage()
         {
             var settingsPage = new SettingsPage();
             await Navigation.PushAsync(settingsPage);
@@ -70,15 +80,20 @@ namespace GalleryApp
 
         private void RefreshButton_Clicked(object sender, EventArgs e)
         {
-            albumViewModel.GetAlbumFromGallery3Async(galleryItemId);
+            albumViewModel.GetAlbumFromGallery3Async(galleryItemId)
+                          .ConfigureAwait(false);
+
+            Analytics.TrackEvent("AlbumPage - RefreshButton_Clicked", null);
         }
 
         private void AboutButton_Clicked(object sender, EventArgs e)
         {
-            OpenAboutPage();
+            OpenAboutPage().ConfigureAwait(false);
+
+            Analytics.TrackEvent("AlbumPage - AboutButton_Clicked", null);
         }
 
-        async private void OpenAboutPage()
+        async Task OpenAboutPage()
         {
             var aboutPage = new AboutPage();
             await Navigation.PushAsync(aboutPage);
