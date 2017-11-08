@@ -22,6 +22,12 @@ namespace GalleryApp.Droid
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 			LoadApplication (new GalleryApp.App ());
 		}
+
+        protected override void OnNewIntent(Android.Content.Intent intent)
+        {
+            base.OnNewIntent(intent);
+            Push.CheckLaunchedFromNotification(this, intent);
+        }
 	}
 }
 

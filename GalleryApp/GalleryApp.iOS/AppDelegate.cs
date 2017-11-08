@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Microsoft.Azure.Mobile.Push;
+
 using Foundation;
 using UIKit;
 
@@ -27,5 +29,24 @@ namespace GalleryApp.iOS
 
 			return base.FinishedLaunching (app, options);
 		}
+
+        /// <summary>
+        /// Dids the receive remote notification.
+        /// </summary>
+        /// <param name="application">Application.</param>
+        /// <param name="userInfo">User info.</param>
+        /// <param name="completionHandler">Completion handler.</param>
+        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, System.Action<UIBackgroundFetchResult> completionHandler)
+        {
+            var result = Push.DidReceiveRemoteNotification(userInfo);
+            if (result)
+            {
+                completionHandler?.Invoke(UIBackgroundFetchResult.NewData);
+            }
+            else
+            {
+                completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
+            }
+        }
 	}
 }
