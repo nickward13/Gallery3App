@@ -18,7 +18,6 @@ namespace GalleryApp.Models
             Type = "album";
             ThumbUrlPublic = "http://";
             WebUrl = "http://";
-
             Entities = new ObservableCollection<Entity>();
         }
 
@@ -32,5 +31,7 @@ namespace GalleryApp.Models
             WebUrl = WebUrl;
             Entities = new ObservableCollection<Entity>();
         }
+
+
     }
 }

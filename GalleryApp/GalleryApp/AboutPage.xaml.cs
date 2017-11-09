@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Microsoft.Azure.Mobile.Analytics;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
