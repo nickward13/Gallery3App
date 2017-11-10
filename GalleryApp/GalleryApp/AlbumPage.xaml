@@ -20,10 +20,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                 <Button x:Name="RefreshButton" Text="Refresh" FontSize="Micro" Clicked="RefreshButton_Clicked" />
                 <Button x:Name="AboutButton" Text="About" FontSize="Micro" Clicked="AboutButton_Clicked" />
-                <Button Text="{Binding Path=Gallery3Url}" FontSize="Micro" Clicked="Button_Clicked"/>
+                <Button x:Name="SettingsButton" Text="Settings" FontSize="Micro" Clicked="Button_Clicked"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
