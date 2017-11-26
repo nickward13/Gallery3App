@@ -115,6 +115,9 @@
     <BundleResource Include="Resources\Icon-Small%402x.png" />
     <BundleResource Include="Resources\Icon-Small%403x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\about.png" />
+    <BundleResource Include="Resources\album.png" />
+    <BundleResource Include="Resources\settings.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

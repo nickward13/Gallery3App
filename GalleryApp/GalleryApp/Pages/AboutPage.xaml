@@ -1,15 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GalleryApp.AboutPage">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="GalleryApp.Pages.AboutPage"
+    Title="About"
+    Icon="about.png">
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Gallery3!"
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="10, 10, 10, 10">
+            <Label Text="Welcome to Gallery3"
+                FontSize="20"
+                HorizontalOptions="CenterAndExpand"
+                Margin="0, 10, 0, 0"/>
             <Label Text="This app is a client browser for Gallery3.  You can point the app to your own Gallery3 instance by tapping on the URL on the main (album) page."
-                  FontSize="Micro" />
+                FontSize="Micro" />
             <Label Text="Many thanks to Adrien Coquet for the this app's logo.  It is a slightly modified version of his Picture icon.  I've added a white circle around his image.  I love The Noun Project, and Adrien's work!  Available here: https://thenounproject.com/icon/1029120/"
-                   FontSize="Micro"/>
+                FontSize="Micro"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -9,7 +9,7 @@ using Microsoft.Azure.Mobile.Analytics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace GalleryApp
+namespace GalleryApp.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AboutPage : ContentPage

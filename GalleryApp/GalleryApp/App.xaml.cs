@@ -9,6 +9,8 @@ using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
 
+using GalleryApp.Pages;
+
 namespace GalleryApp
 {
 	public partial class App : Application
@@ -21,7 +23,7 @@ namespace GalleryApp
                    "ios=9ee90fd3-6d44-4db1-be00-98614aa7051f;",
                    typeof(Analytics), typeof(Crashes));
 
-            MainPage = new NavigationPage(new AlbumPage(1));
+            MainPage = new NavigationPage(new MainPage());
 		}
 
 		protected override async void OnStart ()

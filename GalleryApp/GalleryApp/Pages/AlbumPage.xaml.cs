@@ -9,24 +9,17 @@ using GalleryApp.ViewModels;
 
 using Microsoft.Azure.Mobile.Analytics;
 
-namespace GalleryApp
+namespace GalleryApp.Pages
 {
     public partial class AlbumPage : ContentPage
     {
-        AlbumViewModel albumViewModel;
+        AlbumViewModel albumViewModel = new AlbumViewModel();
 
-        private int galleryItemId;
+        private int galleryItemId = 1;
 
         public AlbumPage()
         {
             InitializeComponent();
-        }
-
-        public AlbumPage(int GalleryItemId)
-        {
-            InitializeComponent();
-            galleryItemId = GalleryItemId;
-            albumViewModel = new AlbumViewModel(GalleryItemId);
             BindingContext = albumViewModel;
         }
 
@@ -53,8 +46,8 @@ namespace GalleryApp
 
         async void OpenNewAlbumPage(int AlbumId)
         {
-            var newAlbumPage = new AlbumPage(AlbumId);
-            await Navigation.PushAsync(newAlbumPage);
+            //var newAlbumPage = new AlbumPage(AlbumId);
+            //await Navigation.PushAsync(newAlbumPage);
         }
 
         async void OpenNewPhotoPage(int PhotoId)

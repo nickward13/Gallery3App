@@ -33,7 +33,12 @@ namespace GalleryApp.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public AlbumViewModel(int AlbumId)
+        public AlbumViewModel()
+        {
+            
+        }
+
+        public void LoadGallery(int AlbumId)
         {
             GetAlbumFromGallery3Async(AlbumId)
                 .ConfigureAwait(false);

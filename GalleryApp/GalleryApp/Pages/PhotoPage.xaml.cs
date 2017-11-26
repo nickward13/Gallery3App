@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using GalleryApp.ViewModels;
 
-namespace GalleryApp
+namespace GalleryApp.Pages
 {
     public partial class PhotoPage : ContentPage
     {

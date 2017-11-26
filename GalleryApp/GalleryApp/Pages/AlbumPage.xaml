@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:local="clr-namespace:GalleryApp;assembly=GalleryApp"
-    x:Class="GalleryApp.AlbumPage"
-    Title="{Binding Path=Album.Title}">
+    x:Class="GalleryApp.Pages.AlbumPage"
+    Title="Album"
+    Icon="album.png">
 	<ContentPage.Content>
         <StackLayout>
             <ListView x:Name="AlbumEntitiesListView"
@@ -19,11 +20,11 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout Orientation="Horizontal">
-                <Button x:Name="RefreshButton" Text="Refresh" FontSize="Micro" Clicked="RefreshButton_Clicked" />
-                <Button x:Name="AboutButton" Text="About" FontSize="Micro" Clicked="AboutButton_Clicked" />
-                <Button Text="{Binding Path=Gallery3Url}" FontSize="Micro" Clicked="Button_Clicked"/>
-            </StackLayout>
+            <Button x:Name="RefreshButton" 
+                Text="Refresh" 
+                FontSize="Micro"
+                HorizontalOptions="Center"
+                Clicked="RefreshButton_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

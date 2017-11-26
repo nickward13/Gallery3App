@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 
 using GalleryApp.Models;
 
-namespace GalleryApp
+namespace GalleryApp.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SettingsPage : ContentPage
