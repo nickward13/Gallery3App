@@ -10,9 +10,9 @@ namespace GalleryApp.Pages
 {
 	public partial class MainPage : TabbedPage
 	{
-		public MainPage()
-		{
-			InitializeComponent();
-		}
+        public MainPage()
+        {
+            InitializeComponent();
+        }
 	}
 }

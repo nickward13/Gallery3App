@@ -15,6 +15,16 @@ namespace GalleryApp
 {
 	public partial class App : Application
 	{
+        static NavigationPage _mainNavigation;
+
+        public static NavigationPage MainNavigation
+        {
+            get { return _mainNavigation ?? (_mainNavigation = new NavigationPage(new MainPage()
+            {
+                Title = "Gallery3"
+            })); }
+        }
+
 		public App ()
 		{
 			InitializeComponent();
@@ -23,7 +33,7 @@ namespace GalleryApp
                    "ios=9ee90fd3-6d44-4db1-be00-98614aa7051f;",
                    typeof(Analytics), typeof(Crashes));
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = MainNavigation;
 		}
 
 		protected override async void OnStart ()
