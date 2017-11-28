@@ -6,25 +6,50 @@
     Title="Album"
     Icon="album.png">
 	<ContentPage.Content>
-        <StackLayout>
-            <ListView x:Name="AlbumEntitiesListView"
-                ItemsSource="{Binding Path=Album.Entities}"
-                ItemTapped="HandleItemTapped">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ImageCell
-                            Text="{Binding Path=Title}"
-                            ImageSource="{Binding ThumbUrlPublic}"
-                            >
-                        </ImageCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Button x:Name="RefreshButton" 
-                Text="Refresh" 
-                FontSize="Micro"
-                HorizontalOptions="Center"
-                Clicked="RefreshButton_Clicked" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+                <ActivityIndicator 
+                    Color="Black"
+                    IsRunning="{Binding IsLoading}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Grid.Row="0" Grid.RowSpan="2" /> 
+            
+                <ListView x:Name="AlbumEntitiesListView"
+                    ItemsSource="{Binding Path=Album.Entities}"
+                    ItemTapped="HandleItemTapped"
+                    IsVisible="{Binding IsLoading, Converter={StaticResource notConverter}}"
+                    SeparatorVisibility="None"
+                    RowHeight="100"
+                    Grid.Row="0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout
+                                    HorizontalOptions="StartAndExpand" 
+                                    VerticalOptions="Center"
+                                    Orientation="Horizontal">
+                                    <Image Source="{Binding ThumbUrlPublic}"
+                                        Aspect="AspectFill"
+                                        IsVisible="{Binding Done}" />
+                                    <Label Text="{Binding Path=Title}"
+                                        VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            
+                <Button x:Name="RefreshButton" 
+                    Text="Refresh" 
+                    FontSize="Micro"
+                    HorizontalOptions="Center"
+                    Clicked="RefreshButton_Clicked" 
+                    Grid.Row="1"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

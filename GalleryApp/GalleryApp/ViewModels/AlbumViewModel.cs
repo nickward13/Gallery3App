@@ -16,6 +16,22 @@ namespace GalleryApp.ViewModels
     {
         private Gallery3 gallery3Source = new Gallery3();
 
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get
+            {
+                return _isLoading;
+            }
+            set {
+                if (_isLoading == value) {
+                    return;
+                }
+                _isLoading = value;
+                NotifyPropertyChanged("IsLoading");
+            }
+        }
+
         private Album album = new Album();
         public Album Album {
             get {
@@ -44,18 +60,23 @@ namespace GalleryApp.ViewModels
                 .ConfigureAwait(false);
         }
 
-        private void NotifyPropertyChanged()
+        private void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
             {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                
                 PropertyChanged(this,
                     new PropertyChangedEventArgs("Album"));
+                
                 PropertyChanged(this, new PropertyChangedEventArgs("Gallery3Url"));
             }
         }
 
         public async Task GetAlbumFromGallery3Async(int AlbumId)
         {
+            IsLoading = true;
+
             ResetAlbum();
             var albumJson = await gallery3Source.GetJsonFromGallery3Async(AlbumId);
             if (albumJson != null)
@@ -66,13 +87,14 @@ namespace GalleryApp.ViewModels
             {
                 this.album = ProblemAlbum();
             }
-            NotifyPropertyChanged();
+            IsLoading = false;
+            NotifyPropertyChanged("Album");
         }
 
         private void ResetAlbum()
         {
             album = new Album();
-            NotifyPropertyChanged();
+            NotifyPropertyChanged("Album");
         }
 
         private Entity ConvertJsonToEntity(JsonValue jsonDoc)

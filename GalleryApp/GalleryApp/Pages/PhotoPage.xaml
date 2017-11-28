@@ -4,6 +4,17 @@
     x:Class="GalleryApp.Pages.PhotoPage"
     Title="{Binding Path=Photo.Title}">
 	<ContentPage.Content>
-        <Image Source="{Binding Path=Photo.FileUrl}" />
+        <StackLayout Spacing="50"
+            HorizontalOptions="Center"
+            Orientation="Vertical">
+            <Image Source="{Binding Path=Photo.FileUrl}"
+                Aspect="AspectFill"
+                IsVisible="{Binding Done}" />
+            <Label Text="{Binding Path=Photo.Title}"
+                HorizontalTextAlignment="Center"/>
+            <Label Text="Thats a pretty cool TREE"
+                FontSize="40"
+                HorizontalTextAlignment="Center"/>
+        </StackLayout>
 	</ContentPage.Content>
 </ContentPage>

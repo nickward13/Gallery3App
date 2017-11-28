@@ -23,20 +23,11 @@ namespace GalleryApp.Pages
             BindingContext = albumViewModel;
         }
 
-        void HandleItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        async void HandleItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
             var tappedEntity = e.Item as Entity;
 
-            if(tappedEntity.Type == "album")
-            {
-                OpenNewAlbumPage(tappedEntity.Id);
-            } else if (tappedEntity.Type == "photo")
-            {
-                OpenNewPhotoPage(tappedEntity.Id);
-            } else
-            {
-                DisplayAlert("You've tapped nothing", "carry on", "Ok");
-            }
+            await OpenNewPhotoPage(tappedEntity.Id);
 
             Analytics.TrackEvent("Album item tapped", new Dictionary<string, string> {
                 { "Name", tappedEntity.Name },
@@ -44,13 +35,7 @@ namespace GalleryApp.Pages
             });
         }
 
-        async void OpenNewAlbumPage(int AlbumId)
-        {
-            //var newAlbumPage = new AlbumPage(AlbumId);
-            //await Navigation.PushAsync(newAlbumPage);
-        }
-
-        async void OpenNewPhotoPage(int PhotoId)
+        async Task OpenNewPhotoPage(int PhotoId)
         {
             var newPhotoPage = new PhotoPage(PhotoId);
             await Navigation.PushAsync(newPhotoPage);
@@ -71,10 +56,9 @@ namespace GalleryApp.Pages
             await Navigation.PushAsync(settingsPage);
         }
 
-        private void RefreshButton_Clicked(object sender, EventArgs e)
+        private async void RefreshButton_Clicked(object sender, EventArgs e)
         {
-            albumViewModel.GetAlbumFromGallery3Async(galleryItemId)
-                          .ConfigureAwait(false);
+            await albumViewModel.GetAlbumFromGallery3Async(galleryItemId);
 
             Analytics.TrackEvent("AlbumPage - RefreshButton_Clicked", null);
         }
